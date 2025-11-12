@@ -2,17 +2,17 @@ from fastapi import APIRouter, Depends, Query, Response
 from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.db.utils import normalize
-from app.db.pagination import parse_range
 from app.models.ofertas import Oferta
 from app.schemas.ofertas import OfertaBase
 
-router = APIRouter(prefix="/ofertas", tags=["Ofertas"])
+router = APIRouter(prefix="/ofertas", tags=["Siembra"])
 
 
 @router.get("/", response_model=list[OfertaBase])
 def listar_ofertas(
     response: Response,
-    range: str | None = Query(None, description="Formato: start-end, ej: 0-49"),
+    limit: int = Query(50, ge=1, le=200, description="Cantidad de registros a retornar"),
+    offset: int = Query(0, ge=0, description="Número de registros a saltar"),
     departamento: str | None = None,
     especie: str | None = None,
     cadena: str | None = None,
@@ -20,8 +20,6 @@ def listar_ofertas(
     ciudad: str | None = None,
     db: Session = Depends(get_db)
 ):
-    offset, limit = parse_range(range)
-
     base_query = db.query(Oferta)
 
     if departamento:
@@ -36,6 +34,7 @@ def listar_ofertas(
         base_query = base_query.filter(normalize(Oferta.Ciu_Desc).ilike(f"%{ciudad}%"))
 
     total = base_query.count()
+
     data = (
         base_query
         .order_by(Oferta.Ofer_Titulo)
@@ -45,7 +44,10 @@ def listar_ofertas(
     )
 
     end = offset + len(data) - 1 if data else offset
-    response.headers["Content-Range"] = f"{offset}-{end}/{total}"
+
+    # ✅ Headers estandarizados IM
+    response.headers["Content-Range"] = f"items {offset}-{end}/{total}"
+    response.headers["X-Total-Count"] = str(total)
     response.headers["Accept-Ranges"] = "items"
 
     return data

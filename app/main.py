@@ -11,7 +11,7 @@ app = FastAPI(
 )
 
 # 🔍 Ruta de prueba de conexión
-@app.get("/test-db", tags=["BaseDatos"])
+@app.get("/test-db", tags=["Siembra"])
 def test_db():
     """Verifica conexión con SQL Server."""
     try:
