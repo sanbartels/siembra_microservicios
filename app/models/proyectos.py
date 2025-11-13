@@ -1,30 +1,31 @@
 from sqlalchemy import Column, Integer, String
-from app.db.session import Base  # ✅ Cambiado aquí
+from sqlalchemy.dialects.mssql import VARCHAR
+from app.db.session import Base
 
 class Proyecto(Base):
-    __tablename__ = "Proyectos"
+    __tablename__ = "tbl_Proyecto"
 
-    Id = Column(String, primary_key=True, index=True)
+    ProyTbl_Id = Column(Integer, primary_key=True, autoincrement=False)
 
-    ProyTbl_Id = Column(Integer, nullable=True)
-    Proy_Id = Column(String, nullable=True)
-    Proy_Titulo = Column(String, nullable=True)
-    Proy_Desc = Column(String, nullable=True)
+    Proy_Id = Column(Integer, nullable=True)
+    Proy_Cod = Column(VARCHAR(50), nullable=True)
+    Proy_Titulo = Column(String, nullable=True)   # varchar(max)
+    Proy_Desc = Column(String, nullable=True)     # varchar(max)
 
     Esp_Id = Column(Integer, nullable=True)
-    Esp_Desc = Column(String, nullable=True)
+    Esp_Desc = Column(VARCHAR(200), nullable=True)
 
     Cad_Id = Column(Integer, nullable=True)
-    Cad_Desc = Column(String, nullable=True)
+    Cad_Desc = Column(VARCHAR(200), nullable=True)
 
-    Ciu_Id = Column(Integer, nullable=True)
-    Ciu_Desc = Column(String, nullable=True)
+    Ciu_Cod = Column(VARCHAR(4), nullable=True)
+    Ciu_Desc = Column(VARCHAR(150), nullable=True)
 
-    Dep_Id = Column(Integer, nullable=True)
-    Dep_Desc = Column(String, nullable=True)
+    Dep_Id = Column(VARCHAR(6), nullable=True)     # 👈 corregido: era int
+    Dep_Desc = Column(VARCHAR(150), nullable=True)
 
     Reg_Id = Column(Integer, nullable=True)
-    Reg_Desc = Column(String, nullable=True)
+    Reg_Desc = Column(VARCHAR(100), nullable=True)
 
     Pais_Id = Column(Integer, nullable=True)
-    Pais_Desc = Column(String, nullable=True)
+    Pais_Desc = Column(VARCHAR(150), nullable=True)

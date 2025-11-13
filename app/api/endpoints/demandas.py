@@ -7,12 +7,11 @@ from app.schemas.demandas import DemandaBase
 
 router = APIRouter(prefix="/demandas", tags=["Siembra"])
 
-
 @router.get("/", response_model=list[DemandaBase])
 def listar_demandas(
     response: Response,
-    limit: int = Query(50, ge=1, le=200, description="Cantidad de registros a retornar"),
-    offset: int = Query(0, ge=0, description="Número de registros a saltar"),
+    limit: int = Query(50, ge=1, le=200),
+    offset: int = Query(0, ge=0),
     departamento: str | None = None,
     especie: str | None = None,
     cadena: str | None = None,
@@ -42,7 +41,6 @@ def listar_demandas(
 
     end = offset + len(data) - 1 if data else offset
 
-    # ✅ Headers estandarizados IM
     response.headers["Content-Range"] = f"{offset}-{end}/{total}"
     response.headers["X-Total-Count"] = str(total)
     response.headers["Accept-Ranges"] = "items"

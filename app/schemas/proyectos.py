@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 
 class ProyectoBase(BaseModel):
-    Id: str
-    ProyTbl_Id: int | None = None
-    Proy_Id: str | None = None
+    ProyTbl_Id: int
+    Proy_Id: int | None = None
+    Proy_Cod: str | None = None
     Proy_Titulo: str | None = None
     Proy_Desc: str | None = None
 
@@ -13,10 +13,10 @@ class ProyectoBase(BaseModel):
     Cad_Id: int | None = None
     Cad_Desc: str | None = None
 
-    Ciu_Id: int | None = None
+    Ciu_Cod: str | None = None
     Ciu_Desc: str | None = None
 
-    Dep_Id: int | None = None
+    Dep_Id: str | None = None
     Dep_Desc: str | None = None
 
     Reg_Id: int | None = None

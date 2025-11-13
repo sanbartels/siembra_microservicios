@@ -7,17 +7,16 @@ from app.schemas.ofertas import OfertaBase
 
 router = APIRouter(prefix="/ofertas", tags=["Siembra"])
 
-
 @router.get("/", response_model=list[OfertaBase])
 def listar_ofertas(
     response: Response,
-    limit: int = Query(50, ge=1, le=200, description="Cantidad de registros a retornar"),
-    offset: int = Query(0, ge=0, description="Número de registros a saltar"),
+    limit: int = Query(50, ge=1, le=200),
+    offset: int = Query(0, ge=0),
     departamento: str | None = None,
+    ciudad: str | None = None,
     especie: str | None = None,
     cadena: str | None = None,
     region: str | None = None,
-    ciudad: str | None = None,
     db: Session = Depends(get_db)
 ):
     base_query = db.query(Oferta)
@@ -29,7 +28,9 @@ def listar_ofertas(
     if cadena:
         base_query = base_query.filter(normalize(Oferta.Cad_Desc).ilike(f"%{cadena}%"))
     if ciudad:
-        base_query = base_query.filter(normalize(Oferta.Ciu_Id).ilike(f"%{ciudad}%"))
+        base_query = base_query.filter(normalize(Oferta.Ciu_Cod).ilike(f"%{ciudad}%"))
+    if region:
+        base_query = base_query.filter(normalize(Oferta.Reg_Desc).ilike(f"%{region}%"))
 
     total = base_query.count()
 
@@ -43,7 +44,6 @@ def listar_ofertas(
 
     end = offset + len(data) - 1 if data else offset
 
-    # ✅ Headers estandarizados IM
     response.headers["Content-Range"] = f"{offset}-{end}/{total}"
     response.headers["X-Total-Count"] = str(total)
     response.headers["Accept-Ranges"] = "items"
