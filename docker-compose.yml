@@ -9,11 +9,11 @@ services:
     env_file:
       - .env
     networks:
-      - siembra-net
+      - agrosavia-network
     # Para desarrollo:
     # volumes:
     #   - .:/app
 
 networks:
-  siembra-net:
-    driver: bridge
+  agrosavia-network:
+    external: true
