@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   siembra-service:
     container_name: siembra-service
@@ -10,6 +8,7 @@ services:
       - .env
     networks:
       - agrosavia-network
+    restart: always
     # Para desarrollo:
     # volumes:
     #   - .:/app
