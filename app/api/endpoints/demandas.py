@@ -7,7 +7,7 @@ from app.schemas.demandas import DemandaBase
 
 router = APIRouter(prefix="/demandas", tags=["Siembra"])
 
-@router.get("/", response_model=list[DemandaBase])
+@router.get("", response_model=list[DemandaBase])
 def listar_demandas(
     response: Response,
     limit: int = Query(50, ge=1, le=200, description="Cantidad de registros a retornar"),

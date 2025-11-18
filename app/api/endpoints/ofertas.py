@@ -7,7 +7,7 @@ from app.schemas.ofertas import OfertaBase
 
 router = APIRouter(prefix="/ofertas", tags=["Siembra"])
 
-@router.get("/", response_model=list[OfertaBase])
+@router.get("", response_model=list[OfertaBase])
 def listar_ofertas(
     response: Response,
     limit: int = Query(50, ge=1, le=200, description="Cantidad de registros a retornar"),

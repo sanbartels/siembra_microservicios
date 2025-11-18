@@ -7,7 +7,7 @@ from app.schemas.proyectos import ProyectoBase
 
 router = APIRouter(prefix="/proyectos", tags=["Siembra"])
 
-@router.get("/", response_model=list[ProyectoBase])
+@router.get("", response_model=list[ProyectoBase])
 def listar_proyectos(
     response: Response,
     limit: int = Query(50, ge=1, le=200, description="Cantidad de registros a retornar"),
