@@ -10,9 +10,6 @@ class Demanda(Base):
     Dem_Titulo = Column(String, nullable=True)
     Dem_Desc = Column(String, nullable=True)
 
-    Cad_Id = Column(Integer, nullable=True)
-    Cad_Desc = Column(VARCHAR(200), nullable=True)
-
     Reg_Id = Column(Integer, nullable=True)
     Reg_Desc = Column(VARCHAR(100), nullable=True)
 

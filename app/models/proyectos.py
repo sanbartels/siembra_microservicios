@@ -15,13 +15,10 @@ class Proyecto(Base):
     Esp_Id = Column(Integer, nullable=True)
     Esp_Desc = Column(VARCHAR(200), nullable=True)
 
-    Cad_Id = Column(Integer, nullable=True)
-    Cad_Desc = Column(VARCHAR(200), nullable=True)
-
     Ciu_Cod = Column(VARCHAR(4), nullable=True)
     Ciu_Desc = Column(VARCHAR(150), nullable=True)
 
-    Dep_Id = Column(VARCHAR(6), nullable=True)     # 👈 corregido: era int
+    Dep_Id = Column(VARCHAR(6), nullable=True)     
     Dep_Desc = Column(VARCHAR(150), nullable=True)
 
     Reg_Id = Column(Integer, nullable=True)

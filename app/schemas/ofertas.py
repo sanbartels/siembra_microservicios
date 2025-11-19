@@ -9,9 +9,6 @@ class OfertaBase(BaseModel):
     Esp_Id: int | None = None
     Esp_Desc: str | None = None
 
-    Cad_Id: int | None = None
-    Cad_Desc: str | None = None
-
     Ciu_Cod: str | None = None
     Ciu_Desc: str | None = None
 

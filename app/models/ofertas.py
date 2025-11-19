@@ -13,9 +13,6 @@ class Oferta(Base):
     Esp_Id = Column(Integer, nullable=True)
     Esp_Desc = Column(VARCHAR(500), nullable=True)
 
-    Cad_Id = Column(Integer, nullable=True)
-    Cad_Desc = Column(VARCHAR(500), nullable=True)
-
     Ciu_Cod = Column(VARCHAR(4), nullable=True)
     Ciu_Desc = Column(VARCHAR(150), nullable=True)
 

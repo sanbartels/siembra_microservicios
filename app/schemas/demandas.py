@@ -6,9 +6,6 @@ class DemandaBase(BaseModel):
     Dem_Titulo: str | None = None
     Dem_Desc: str | None = None
 
-    Cad_Id: int | None = None
-    Cad_Desc: str | None = None
-
     Reg_Id: int | None = None
     Reg_Desc: str | None = None
 
